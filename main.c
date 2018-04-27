@@ -26,6 +26,8 @@ int main(int argc, char **argv) {
   else
     parse_file( "stdin", transform, edges, polygons, s, zb);
 
+  srand(time(NULL));
+
   free_matrix( edges );
   free_matrix( transform );
   free_matrix( polygons );

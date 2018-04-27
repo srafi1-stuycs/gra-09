@@ -135,6 +135,22 @@ void parse_file ( char * filename,
       polygons->lastcol = 0;
     }//end of box
 
+    else if ( strncmp(line, "poly", strlen(line)) == 0 ) {
+      fgets(line, sizeof(line), f);
+      //printf("BOX\t%s", line);
+
+      sscanf(line, "%lf %lf %lf %lf %lf %lf %lf %lf %lf",
+             xvals, yvals, zvals,
+             xvals+1, yvals+1, zvals+1,
+             xvals+2, yvals+2, zvals+2);
+      add_polygon(polygons, xvals[0], yvals[0], zvals[0],
+              xvals[1], yvals[1], zvals[1],
+              xvals[2], yvals[2], zvals[2]);
+      matrix_mult(peek(csystems), polygons);
+      draw_polygons(polygons, s, zb, c);
+      polygons->lastcol = 0;
+    }//end of box
+
     else if ( strncmp(line, "sphere", strlen(line)) == 0 ) {
       fgets(line, sizeof(line), f);
       //printf("SPHERE\t%s", line);

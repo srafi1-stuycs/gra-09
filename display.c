@@ -16,11 +16,11 @@ for red, green and blue respectively
 
 /*======== void plot() ==========
 Inputs:   screen s
-         sbuffer zb
-         color c
-         int x
-         int y
-         double z
+sbuffer zb
+color c
+int x
+int y
+double z
 Returns:
 Sets the color at pixel x, y to the color represented by c
 Note that s[0][0] will be the upper left hand corner
@@ -30,9 +30,11 @@ of s that get set. For example, using s[x][YRES-1-y] will have
 pixel 0, 0 located at the lower left corner of the screen
 ====================*/
 void plot(screen s, zbuffer zb, color c, int x, int y, double z) {
-  int newy = YRES - 1 - y;
-  if ( x >= 0 && x < XRES && newy >=0 && newy < YRES )
-    s[x][newy] = c;
+    int newy = YRES - 1 - y;
+    if ( x >= 0 && x < XRES && newy >=0 && newy < YRES && z > zb[x][newy]) {
+        s[x][newy] = c;
+        zb[x][newy] = z;
+    }
 }
 
 /*======== void clear_screen() ==========
